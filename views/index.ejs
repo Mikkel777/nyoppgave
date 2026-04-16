@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Rever</title>
+  <style>
+    body { 
+        text-align: center; 
+        font-family: Arial; 
+    }
+    .container { 
+        display: flex; 
+        justify-content: center; 
+        gap: 40px; 
+        margin-top: 50px; 
+    }
+    img { 
+        width: 250px; 
+        border-radius: 10px; 
+    }
+    button { 
+        margin-top: 10px; 
+        padding: 10px; 
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hvilken rev er søtest?</h1>
+
+  <div class="container">
+    <div>
+      <img src="https://randomfox.ca/images/<%= fox1 %>.jpg">
+        <form action="/vote" method="POST">
+            <input type="hidden" name="foxId" value="<%= fox1 %>">
+            <button>Velg denne</button>
+        </form>
+    </div>
+
+    <div>
+      <img src="https://randomfox.ca/images/<%= fox2 %>.jpg">
+      <form action="/vote" method="POST">
+        <input type="hidden" name="foxId" value="<%= fox2 %>">
+        <button>Velg denne</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
