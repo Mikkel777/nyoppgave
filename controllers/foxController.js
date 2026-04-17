@@ -1,6 +1,6 @@
-let votes = {};
+const Fox = require("../models/Fox");
 
-exports.getHome = (req, res) => {
+exports.getHome = async (req, res)=> {
     let fox1 = Math.floor(Math.random() * 100) + 1;
     let fox2 = Math.floor(Math.random() * 100) + 1;
 
@@ -8,37 +8,39 @@ exports.getHome = (req, res) => {
         fox2 = Math.floor(Math.random() * 100) + 1;
     }
 
-    let winner = null;
-    let maxVotes = 0;
-
-    for (let id in votes) {
-        if (votes[id] > maxVotes) {
-            maxVotes = votes[id];
-            winner = id;
-        }
-    }
-
-    let sortedFoxes = Object.entries(votes)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3);
+    const foxes = await Fox.find().sort({votes: -1});
+    const winner = foxes.length > 0 ? foxes[0] : null;
 
     res.render("index", {
         fox1,
         fox2,
         winner,
-        sortedFoxes,
-        query: req.query
+        voted: req.query.voted
     });
 };
 
-exports.voteFox = (req, res) => {
-    let foxId = req.body.foxId;
+exports.voteFox = async (req, res) => {
+    const foxId = req.body.foxId;
 
-    if (!votes[foxId]) {
-        votes[foxId] = 0;
+    let fox = await Fox.findOne({foxId});
+
+    if(!fox) {
+        fox = new Fox ({foxid});
     }
 
-    votes[foxId]++;
+    fox.votes++;
+    await fox.save();
 
     res.redirect("/?voted=" + foxId);
+}
+
+exports.getStats = async (req, res) => {
+  const foxes = await Fox.find().sort({ votes: -1 });
+
+  const winner = foxes.length > 0 ? foxes[0] : null;
+
+  res.render("statistikk", {
+    sortedFoxes: foxes,
+    winner
+  });
 };
