@@ -25,7 +25,7 @@ exports.voteFox = async (req, res) => {
     let fox = await Fox.findOne({foxId});
 
     if(!fox) {
-        fox = new Fox ({foxid});
+        fox = new Fox ({foxId});
     }
 
     fox.votes++;
@@ -35,7 +35,9 @@ exports.voteFox = async (req, res) => {
 }
 
 exports.getStats = async (req, res) => {
-  const foxes = await Fox.find().sort({ votes: -1 });
+  const foxes = await Fox.find()
+  .sort({ votes: -1 })
+  .limit(5);
 
   const winner = foxes.length > 0 ? foxes[0] : null;
 
