@@ -4,8 +4,6 @@
 
 Dette systemet består av en frontend, backend og database. Backend håndterer API-endepunkter som brukes til å registrere stemmer og vise statistikk.
 
----så
-
 ## GET /
 
 **Beskrivelse:**
