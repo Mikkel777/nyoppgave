@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="no">
-    <head>
+<head>
   <meta charset="UTF-8">
   <title>Statistikk</title>
-    <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-    <%- include('templates/nav') %>
-<h1>Statistikk</h1>
-<% if (winner) { %>
-  <h2>Rev <%= winner[0] %> leder med <%= winner[1] %> stemmer</h2>
-<% } else { %>
-  <p>Ingen stemmer enda</p>
-<% } %>
-<div class="grid">
-  <% sortedFoxes.forEach(fox => { %>
-    <div class="card">
-      <img class="image-statistikk" src="https://randomfox.ca/images/<%= fox[0] %>.jpg">
-      <p>Rev <%= fox.foxId %> har: <%= fox.votes %> Stemmer</p>
-    </div>
-  <% }) %>
-</div>
-<br>
-<a href="/">Tilbake</a>
+  <%- include('templates/nav') %>
+  <main>
+    <h1 id="main-heading">Statistikk</h1>
+    <% if (winner) { %>
+      <h2 role="status" aria-live="polite">
+        Rev <%= winner.foxId %> leder med <%= winner.votes %> stemmer
+      </h2>
+    <% } else { %>
+      <p role="status" aria-live="polite">Ingen stemmer enda</p>
+    <% } %>
+      <section class="grid">
+        <% sortedFoxes.forEach((fox, index) => { %>
+          <article class="card">
+            <h3>#<%= index + 1 %></h3>
+            <img src="https://randomfox.ca/images/<%= fox.foxId %>.jpg" alt="Bilde av rev nummer <%= fox.foxId %>">
+            <p><strong>Rev <%= fox.foxId %></strong></p>
+            <p><%= fox.votes %> stemmer</p>
+          </article>
+        <% }) %>
+      </section>
+    <nav aria-label="Navigasjon">
+      <a href="/">Tilbake til forsiden</a>
+    </nav>
+  </main>
 </body>
 </html>
