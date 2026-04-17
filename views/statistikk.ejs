@@ -1,4 +1,27 @@
-<head>
-  <link rel="stylesheet" href="/main.css">
+<!DOCTYPE html>
+<html lang="no">
+    <head>
+  <meta charset="UTF-8">
+  <title>Statistikk</title>
+    <link rel="stylesheet" href="/main.css">
 </head>
-<%- include('templates/nav') %>
+<body>
+    <%- include('templates/nav') %>
+<h1>Statistikk</h1>
+<% if (winner) { %>
+  <h2>Rev <%= winner[0] %> leder med <%= winner[1] %> stemmer</h2>
+<% } else { %>
+  <p>Ingen stemmer enda</p>
+<% } %>
+<div class="grid">
+  <% sortedFoxes.forEach(fox => { %>
+    <div class="card">
+      <img class="image-statistikk" src="https://randomfox.ca/images/<%= fox[0] %>.jpg">
+      <p>Rev <%= fox.foxId %> har: <%= fox.votes %> Stemmer</p>
+    </div>
+  <% }) %>
+</div>
+<br>
+<a href="/">Tilbake</a>
+</body>
+</html>

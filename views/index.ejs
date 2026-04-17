@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <title>Rever</title>
   <style>
-    body { 
-        text-align: center; 
-        font-family: Arial; 
-    }
     .container { 
         display: flex; 
         justify-content: center; 
         gap: 40px; 
         margin-top: 50px; 
     }
+
+    h1 {
+      margin-top: 150px;
+    }
+
     img { 
         width: 250px; 
         border-radius: 10px; 
@@ -27,11 +28,10 @@
 </head>
 <body>
     <%- include('templates/nav') %>
-  <h1>Hvilken rev er søtest?</h1>
-
+    <h1>Hvilken rev er søtest?</h1>
   <div class="container">
     <div>
-      <img src="https://randomfox.ca/images/<%= fox1 %>.jpg">
+      <img class="image-rate" src="https://randomfox.ca/images/<%= fox1 %>.jpg">
         <form action="/vote" method="POST">
             <input type="hidden" name="foxId" value="<%= fox1 %>">
             <button>Velg denne</button>
@@ -46,5 +46,10 @@
       </form>
     </div>
   </div>
+  <% if (voted) { %>
+  <p style="color: green; font-size: 22px; font-weight:bolder;">
+    Du stemte på rev nr <%= voted %>
+  </p>
+<% } %>
 </body>
 </html>
