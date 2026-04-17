@@ -42,8 +42,6 @@ Statistikken blir feil og systemet kan overbelastes.
 - Begrense antall forespørsler per IP
 - Eventuelt bruke express-rate-limit
 
----
-
 ## 2. Angrepstyper
 
 ### DoS (Denial of Service)
@@ -59,9 +57,7 @@ Nettsiden blir treg eller utilgjengelig.
 - Brannmur
 - Overvåkning av trafikk
 
----
-
-### ⚔️ NoSQL Injection
+### NoSQL Injection
 
 **Beskrivelse:**
 En angriper prøver å manipulere database-queries.
@@ -70,7 +66,7 @@ En angriper prøver å manipulere database-queries.
 
 { "foxId": { "$gt": "" } }
 
-# 🔐 Sikkerhet – NoSQL Injection og tiltak
+# Sikkerhet – NoSQL Injection og tiltak
 
 ## Eksempel
 
@@ -95,3 +91,4 @@ Systemet er sikret ved å:
 * Begrense database-tilgang til interne IP-adresser
 * Validere input fra brukere
 * Beskytte mot spam og overbelastning
+
